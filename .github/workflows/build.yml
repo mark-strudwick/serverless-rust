@@ -29,8 +29,6 @@ jobs:
           platform: linux
           arch: x86_64
       - name: Cargo Lambda build
-        working-directory: backend
         run: cargo lambda build --release
       - name: Cargo lambda deploy
-        working-directory: backend
         run: cargo lambda deploy
