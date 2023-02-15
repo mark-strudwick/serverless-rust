@@ -7,9 +7,15 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+
     permissions:
       id-token: write
       contents: read
+
+   strategy:
+      matrix:
+        node-version: [16.x]
+
     steps:
       - uses: actions/checkout@v3
       - name: Configure AWS Credentials
@@ -17,6 +23,7 @@ jobs:
         with:
           role-to-assume: arn:aws:iam::816824071565:role/github-actions-role
           aws-region: eu-west-2
+
       - name: Install Rust toolchain
         uses: dtolnay/rust-toolchain@stable
       - name: Install Zig toolchain
@@ -31,5 +38,12 @@ jobs:
           arch: x86_64
       - name: Cargo Lambda build
         run: cargo lambda build --release --arm64
-      - name: Cargo lambda deploy
-        run: cargo lambda deploy http-lambda
+        
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+      - name: Install packages
+        run: npm ci
+      - name: cdk deploy
+        run: npm run deploy
