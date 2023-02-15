@@ -32,13 +32,13 @@ jobs:
           repo: cargo-lambda/cargo-lambda
           platform: linux
           arch: x86_64
-      - name: Cargo Lambda build
-        run: cargo lambda build --release --arm64
+      # - name: Cargo Lambda build
+      #   run: cargo lambda build --release --arm64
       - name: 'Use Node.js ${{ matrix.node-version }}'
         uses: actions/setup-node@v3
         with:
           node-version: '${{ matrix.node-version }}'
       - name: Install packages
-        run: npm ci
+        run: cd infrastructure && npm ci
       - name: cdk deploy
-        run: npm run deploy
+        run: cd infrastructure && npm run deploy
