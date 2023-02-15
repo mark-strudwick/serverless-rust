@@ -29,7 +29,7 @@ jobs:
           platform: linux
           arch: x86_64
       - name: debug
-        run: pwd && ls -lha
+        run: cd .. && pwd && ls -lha
       - name: Cargo Lambda build
         run: cargo lambda build --release
       - name: Cargo lambda deploy
