@@ -41,4 +41,4 @@ jobs:
       - name: Install packages
         run: cd infrastructure && npm ci
       - name: cdk deploy
-        run: cd infrastructure && npm run deploy
+        run: cd infrastructure && npm run cdk
