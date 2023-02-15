@@ -30,6 +30,6 @@ jobs:
           platform: linux
           arch: x86_64
       - name: Cargo Lambda build
-        run: cargo lambda build --release
+        run: cargo lambda build --release --arm64
       - name: Cargo lambda deploy
-        run: cargo lambda deploy
+        run: cargo lambda deploy http-lambda
