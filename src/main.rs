@@ -5,7 +5,7 @@ use lambda_http::{
 use axum::{
     response::Json,
     Router,
-    routing::get,
+    routing::{get, post},
 };
 use serde_json::{Value, json};
 
@@ -21,6 +21,18 @@ async fn root() -> Json<Value> {
     }))
 }
 
+#[derive(Clone, Debug, serde::Deserialize, serde::Serialize)]
+struct Person {
+    name: String,
+}
+
+async fn person(Json(person): Json<Person>) -> Json<Value> {
+    let name = person.name;
+    Json(json!({
+        "message": format!("Hello, {}!", name),
+    }))
+}
+
 #[tokio::main]
 async fn main() -> Result<(), Error> {
     tracing_subscriber::fmt()
@@ -33,7 +45,8 @@ async fn main() -> Result<(), Error> {
 
     let app = Router::new()
         .fallback(not_found_handler)
-        .route("/",  get(root));
+        .route("/",  get(root))
+        .route("/person", post(person));
 
     run(app).await
 }
