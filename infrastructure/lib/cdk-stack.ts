@@ -12,6 +12,7 @@ export class CdkStack extends cdk.Stack {
     const func = new RustFunction(this, 'rust-function', {
       manifestPath: path.join(__dirname, '..', '..'),
       functionName: 'rust-function',
+      binaryName: 'backend'
     });
 
     const apigw = new HttpApi(this, 'apigw', {
