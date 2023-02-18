@@ -25,6 +25,9 @@ async fn root() -> Json<Value> {
 
 #[tokio::main]
 async fn main() -> Result<(), Error> {
+    dotenv::dotenv().ok();
+    let db_url = std::env::var("DATABASE_URL").expect("DATABASE_URL env variable");
+
     tracing_subscriber::fmt()
         .with_max_level(tracing::Level::INFO)
         // disable printing the name of the module in every log line.
@@ -35,7 +38,7 @@ async fn main() -> Result<(), Error> {
 
     let pool = MySqlPoolOptions::new()
         .max_connections(5)
-        .connect(&std::env::var("DATABASE_URL").expect("DATABASE_URL is not set"))
+        .connect(&db_url)
         .await
         .expect("Failed to connect to database");
 
