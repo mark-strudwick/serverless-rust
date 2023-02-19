@@ -16,6 +16,7 @@ tracing = { version = "0.1", features = ["log"] }
 tracing-subscriber = { version = "0.3", default-features = false, features = ["fmt"] }
 openssl-sys = "0.9"
 openssl = { version = "0.10", features = ["vendored"] }
+pkg-config = "0.3.26"
 
 [package.metadata.lambda.deploy]
 memory = 512
