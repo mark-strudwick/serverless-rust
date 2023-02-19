@@ -20,7 +20,7 @@ export class CdkStack extends cdk.Stack {
     });
 
     apigw.addRoutes({
-      path: '/',
+      path: '/{proxy+}',
       methods: [HttpMethod.ANY],
       integration: new HttpLambdaIntegration(
         'function-integration',
