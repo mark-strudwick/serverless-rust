@@ -20,8 +20,6 @@ jobs:
         with:
           role-to-assume: 'arn:aws:iam::816824071565:role/github-actions-role'
           aws-region: eu-west-2
-      - name: Install SSL
-        run: sudo apt-get install libssl-dev
       - name: Install Rust toolchain
         uses: dtolnay/rust-toolchain@stable
       - name: Install Zig toolchain
