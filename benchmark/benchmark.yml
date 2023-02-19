@@ -1,0 +1,19 @@
+---
+
+concurrency: 5
+base: 'http://127.0.0.1:9000'
+iterations: 20
+rampup: 2
+
+plan:
+  - name: Fetch users
+    request:
+      url: /lambda-url/backend/
+
+  - name: Create a person 
+    request:
+      url: /lambda-url/backend/person
+      method: POST
+      body: '{"name": "Kobe"}'
+      headers:
+        Content-Type: 'application/json'

@@ -16,3 +16,6 @@ POST http://127.0.0.1:9000/lambda-url/backend/person
 
 # Deploy
 Github Actions will automatically deploy the application to AWS, by creating a Lambda, and APIGW. The resource template can be found in the `infrastructure` folder, where there is an AWS CDK stack.
+
+# Benchmark
+Run the command `drill --benchmark benchmark/benchmark.yml --stats` to see benchmark stats against a locally running application.
